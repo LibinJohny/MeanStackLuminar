@@ -1,0 +1,14 @@
+.num{
+    color:red;
+}
+
+.extreme{
+    color:blue;
+}
+
+#border{
+    border-style: solid;
+    border-color: greenyellow;
+    border-width: 5px;
+    width: 5%;
+}
