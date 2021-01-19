@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch post</title>
+    <!-- CSS only -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">Fetch Post</div>
+            <div class="col-4"></div>
+        </div>    
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <input type="button" class="btn btn-success" onclick="getPosts()" value="Fetch Posts" >
+            </div>
+            <div class="col-4"></div>
+        </div>    
+        
+    </div>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">UserId</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Body</th>
+                  </tr>
+                </thead>
+                <tbody id="result">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    
+</body>
+<script>
+    var url="https://jsonplaceholder.typicode.com/posts";
+    var xhr= new XMLHttpRequest();
+    xhr.open('get',url);
+    function getPosts(){
+        xhr.send();
+    }
+    xhr.onreadystatechange=()=>{
+        if(xhr.readyState == 4){
+            if(xhr.status>=200 && xhr.status<300){
+                console.log("success")
+                var posts = JSON.parse(xhr.responseText);
+                console.log(posts);
+                var html_data = "";
+                posts.forEach(post => {
+                html_data=html_data+"<tr><td>"+post.userId+"</td> <td>"+post.title+"</td><td>"+post.body+"</td> </tr>";
+                });
+                document.querySelector("#result").innerHTML = html_data;
+            }
+            else{
+                console.log("not sucess")
+            }
+            console.log("task completed")
+        }
+    }
+</script>
+</html>

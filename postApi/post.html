@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- CSS only -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">Create Your Post</div>
+            <div class="col-4"></div>
+        </div>    
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title">
+                <br>
+
+                <label for="body">Body</label>
+                <input type="text" class="form-control" id="body">
+                <br>
+
+                <label for="userId">UserId</label>
+                <input type="text" class="form-control" id="uid">
+                <br>
+
+                <input type="button" class="btn btn-success" onclick="createPost()" value="Create Post" >
+            </div>
+            <div class="col-4"></div>
+        </div>    
+        
+    </div>
+    
+</body>
+<script>
+    function createPost(){
+        var title = document.querySelector("#title").value;
+        var body = document.querySelector("#body").value;
+        var uid =document.querySelector("#uid").value;
+        
+
+        var newpost = {
+            title:title,
+            body:body,
+            userId:uid,
+        }
+        senddata(newpost);
+    }
+
+    var url= 'https://jsonplaceholder.typicode.com/posts';
+    var xhr= new XMLHttpRequest();
+    xhr.open('post',url);
+    function senddata(post){
+        xhr.send(post);
+    }
+    xhr.onreadystatechange=()=>{
+        if(xhr.readyState == 4){
+            if(xhr.status>=200 && xhr.status<300){
+                console.log("success")
+                alert(xhr.response);
+            }
+            else{
+                console.log("not sucess")
+            }
+            console.log("task completed")
+        }
+    }
+</script>
+</html>

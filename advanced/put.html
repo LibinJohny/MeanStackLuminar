@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUT</title>
+</head>
+<body>
+    
+    
+</body>
+<script>
+    var url= 'https://jsonplaceholder.typicode.com/posts/1';
+    var data = {
+        id: 1,
+        title: 'foo',
+        body: 'bar',
+        userId: 1,
+    } 
+    var post = JSON.stringify(data);
+    var xhr= new XMLHttpRequest();
+    xhr.open('put',url);
+    xhr.send(post);
+    xhr.onreadystatechange=()=>{
+        if(xhr.readyState == 4){
+            if(xhr.status>=200 && xhr.status<300){
+                console.log("success")
+                alert(xhr.response);
+            }
+            else{
+                console.log("not sucess")
+            }
+            console.log("task completed")
+        }
+    }
+</script>
+</html>
